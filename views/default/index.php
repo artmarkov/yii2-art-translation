@@ -50,9 +50,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="panel-body">
 
                         <?php if (!$currentLanguage || !$currentCategory): ?>
-                            <h4>
+                            <h5>
                                 <?= Yii::t('art/translation', 'Please, select message group and language to view translations...') ?>
-                            </h4>
+                            </h5>
                         <?php else: ?>
 
                             <?php $form = ActiveForm::begin() ?>
