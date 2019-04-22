@@ -62,6 +62,13 @@ $this->params['breadcrumbs'][] = $this->title;
                                 $links = '';
                                 if (User::hasPermission('updateSourceMessages') && (!$message->source->immutable || User::hasPermission('updateImmutableSourceMessages'))) {
                                     $links .= ' ' . Html::a('<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>', ['/translation/source/update', 'id' => $message->source_id]);
+                                    $links .= ' ' . Html::a('<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>', ['/translation/source/delete', 'id' => $message->source_id], 
+                                            [                                        
+                                                'data' => [
+                                                    'confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
+                                                    'method' => 'post',
+                                                ],
+                                            ]);
                                 }
                                 ?>
 
