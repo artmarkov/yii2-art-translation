@@ -10,6 +10,10 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('art/translation', 'Message 
 $this->params['breadcrumbs'][] = 'Update Message Source';
 ?>
 <div class="message-source-update">
-    <h3 class="lte-hide-title"><?= Html::encode($this->title) ?></h3>
+    <div class="row">
+        <div class="col-sm-12">
+            <h3 class="page-title"><?=  Html::encode($this->title) ?></h3>            
+        </div>
+    </div>
     <?= $this->render('_form', compact('model')) ?>
 </div>
