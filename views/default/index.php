@@ -45,7 +45,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
             </div>
 
-            <?php $form = ActiveForm::begin() ?>
             <div class="col-md-8">
                 <div class="panel panel-default">
                     <div class="panel-body">
@@ -56,36 +55,38 @@ $this->params['breadcrumbs'][] = $this->title;
                             </h5>
                         <?php else: ?>
 
+                            <?php $form = ActiveForm::begin() ?>
 
-                        <?php foreach ($messages as $index => $message) : ?>
-                            <?php
-                            $links = '';
-                            if (User::hasPermission('updateSourceMessages') && (!$message->source->immutable || User::hasPermission('updateImmutableSourceMessages'))) {
-                                $links .= ' ' . Html::a('<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>', ['/translation/source/update', 'id' => $message->source_id]);
-                                $links .= ' ' . Html::a('<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>', ['/translation/source/delete', 'id' => $message->source_id],
-                                        [
-                                            'data' => [
-                                                'confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
-                                                'method' => 'post',
-                                            ],
-                                        ]);
-                            }
-                            ?>
+                            <?php foreach ($messages as $index => $message) : ?>
+                                <?php
+                                $links = '';
+                                if (User::hasPermission('updateSourceMessages') && (!$message->source->immutable || User::hasPermission('updateImmutableSourceMessages'))) {
+                                    $links .= ' ' . Html::a('<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>', ['/translation/source/update', 'id' => $message->source_id]);
+                                    $links .= ' ' . Html::a('<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>', ['/translation/source/delete', 'id' => $message->source_id],
+                                            [
+                                                'data' => [
+                                                    'confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
+                                                    'method' => 'post',
+                                                ],
+                                            ]);
+                                }
+                                ?>
 
-                            <?= $form->field($message, "[$index]translation")->label($message->source->message . $links) ?>
+                                <?= $form->field($message, "[$index]translation")->label($message->source->message . $links) ?>
 
-                        <?php endforeach; ?>
-                    </div>
-                    <div class="panel-footer">
-                        <?php if (User::hasPermission('updateSourceMessages')): ?>
-                            <?= Html::submitButton(Yii::t('art', 'Save All'), ['class' => 'btn btn-primary']) ?>
-                        <?php endif; ?>
+                            <?php endforeach; ?>
+
+                            <?php if (User::hasPermission('updateSourceMessages')): ?>
+                                <?= Html::submitButton(Yii::t('art', 'Save All'), ['class' => 'btn btn-primary']) ?>
+                            <?php endif; ?>
+
+                            <?php ActiveForm::end() ?>
+
                         <?php endif; ?>
 
                     </div>
                 </div>
             </div>
-            <?php ActiveForm::end() ?>
         </div>
 
     </div>
