@@ -21,11 +21,10 @@ use artsoft\widgets\ActiveForm;
         ])
         ?>
 
-        <div class="row">
-            <div class="col-md-9">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-6">
                                 <?php $categories = ArrayHelper::merge(MessageSource::getCategories(), [' ' => Yii::t('art/translation', 'Create New Category')]) ?>
@@ -43,40 +42,25 @@ use artsoft\widgets\ActiveForm;
 
                         <?= $form->field($model, 'message')->textInput(['rows' => 6]) ?>
 
+                        <?= $form->field($model, 'immutable')->checkbox() ?>
                     </div>
                 </div>
             </div>
-
-            <div class="col-md-3">
-
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <div class="record-info">
-                            <div class="form-group clearfix">
-                                <?= $form->field($model, 'immutable')->checkbox() ?>
-                            </div>
-
-                            <div class="form-group">
-                                <?php if ($model->isNewRecord): ?>
-                                    <?= Html::submitButton(Yii::t('art', 'Create'), ['class' => 'btn btn-primary']) ?>
-                                    <?= Html::a(Yii::t('art', 'Cancel'), ['/translation/default/index'], ['class' => 'btn btn-default']) ?>
-                                <?php else: ?>
-                                    <?= Html::submitButton(Yii::t('art', 'Save'), ['class' => 'btn btn-primary']) ?>
-                                    <?=
-                                    Html::a(Yii::t('art', 'Delete'), ['/translation/source/delete', 'id' => $model->id], [
-                                        'class' => 'btn btn-danger',
-                                        'data' => [
-                                            'confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
-                                            'method' => 'post',
-                                        ],
-                                    ])
-                                    ?>
-                                <?php endif; ?>
-                            </div>
-                        </div>
-                    </div>
+            <div class="panel-footer">
+                <div class="form-group">
+                    <?= Html::a(Yii::t('art', 'Go to list'), ['/translation/default/index'], ['class' => 'btn btn-default']) ?>
+                    <?= Html::submitButton(Yii::t('art', 'Save'), ['class' => 'btn btn-primary']) ?>
+                    <?php if (!$model->isNewRecord): ?>
+                        <?= Html::a(Yii::t('art', 'Delete'), ['/translation/source/delete', 'id' => $model->id], [
+                            'class' => 'btn btn-danger',
+                            'data' => [
+                                'confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
+                                'method' => 'post',
+                            ],
+                        ])
+                        ?>
+                    <?php endif; ?>
                 </div>
-
             </div>
         </div>
 

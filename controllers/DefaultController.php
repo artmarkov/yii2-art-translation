@@ -65,7 +65,7 @@ class DefaultController extends BaseController
                 $message->save(false);
             }
 
-            Yii::$app->session->setFlash('crudMessage', Yii::t('art', 'Your item has been updated.'));
+            Yii::$app->session->setFlash('success', Yii::t('art', 'Your item has been updated.'));
             return $this->refresh();
         }
 
